@@ -17,7 +17,9 @@ class App extends Component {
         <header className="App-header">
           <h1>Rancid Tomatillos</h1>
         </header>
-        <Movies />
+        <main>
+          <Movies movies={this.state.movies}/>
+        </main>
       </div>
     )
   } 
