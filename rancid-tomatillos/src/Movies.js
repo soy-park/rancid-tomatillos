@@ -9,6 +9,7 @@ function Movies({movies}) {
             title={movieInfo.title}
             poster={movieInfo.poster_path}
             id={movieInfo.id}
+            key={movieInfo.id}
           />
         )
     })

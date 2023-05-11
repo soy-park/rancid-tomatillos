@@ -1,0 +1,10 @@
+.movies-container {
+    /* display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 40vh 30vh 30vh;
+    grid-gap: 20px;
+    padding: 20px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
