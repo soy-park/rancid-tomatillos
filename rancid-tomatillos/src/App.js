@@ -13,14 +13,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
+      <main className="App">
           <h1>Rancid Tomatillos</h1>
-        </header>
-        <main>
           <Movies movies={this.state.movies}/>
-        </main>
-      </div>
+      </main>
     )
   } 
 }

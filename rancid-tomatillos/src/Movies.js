@@ -6,7 +6,6 @@ function Movies({movies}) {
     const movieCards = movies.map(movieInfo => {
         return (
           <Movie
-            title={movieInfo.title}
             poster={movieInfo.poster_path}
             id={movieInfo.id}
             key={movieInfo.id}

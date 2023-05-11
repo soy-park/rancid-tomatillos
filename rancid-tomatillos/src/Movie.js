@@ -5,7 +5,6 @@ const Movie = ({ title, poster, id }) => {
    return (
      <div className="movieCard">
        <img src={poster}/>
-       <h3>{title}</h3>
      </div>
    )
 }
