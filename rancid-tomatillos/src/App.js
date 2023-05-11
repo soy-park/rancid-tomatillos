@@ -11,11 +11,17 @@ class App extends Component {
     }
   }
 
+  displayMovieInfo = (id) => {
+    const filteredMovie = this.state.movies.filter(movie => movie.id === id);
+
+    this.setState({ movies: filteredMovie })
+  }
+
   render() {
     return (
       <main className="App">
           <h1>Rancid Tomatillos</h1>
-          <Movies movies={this.state.movies}/>
+          <Movies movies={this.state.movies} displayMovieInfo={this.displayMovieInfo}/>
       </main>
     )
   } 
