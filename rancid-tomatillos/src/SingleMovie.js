@@ -16,7 +16,7 @@ const SingleMovie = ({ movie, displayMainPage }) => {
         <p>Average Rating: {(movie[0].average_rating).toFixed(1)}</p>
         {/* <p>Budget: {(this.state.movies[0].budget)}</p>
         <p>Revenue: {(this.state.movies[0].revenue)}</p> */}
-      <button onClick= {() => displayMainPage()}>Back to Main</button>
+      <button className="back-to-main" onClick= {() => displayMainPage()}>Back to Main</button>
       </div>
     </div>
   );
