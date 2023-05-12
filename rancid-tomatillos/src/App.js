@@ -1,26 +1,40 @@
-import logo from './logo.svg';
+import React, { Component } from "react";
 import './App.css';
-import movieData from "src/mockData"
+import movieData from './mockData';
+import Movies from "./Movies";
+import SingleMovie from "./SingleMovie";
+import Movie from "./Movie";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      movies: movieData.movies,
+    }
+  }
+
+  displayMovieInfo = (id) => {
+    const filteredMovie = this.state.movies.filter(movie => movie.id === id);
+
+    this.setState({ movies: filteredMovie })
+    console.log(filteredMovie)
+  }
+
+  displayMainPage = () => {
+    this.setState({ movies: movieData.movies })
+  }
+  
+  render() {
+    console.log(this.state.movies)
+    console.log(this.state.movies[0].title)
+    return (
+      <main className="App">
+          <h1>Rancid Tomatillos</h1>
+          {this.state.movies.length > 1 && <Movies movies={this.state.movies} displayMovieInfo={this.displayMovieInfo}/>}
+          {this.state.movies.length === 1 && <SingleMovie movie={this.state.movies} displayMainPage={this.displayMainPage}/> } 
+      </main>
+    )
+  } 
 }
 
 export default App;
