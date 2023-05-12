@@ -9,15 +9,22 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      movies: movieData.movies,
+      movies: ''
     }
+  }
+
+  componentDidMount = () => {
+    fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ movies: data.movies })
+      })
   }
 
   displayMovieInfo = (id) => {
     const filteredMovie = this.state.movies.filter(movie => movie.id === id);
 
     this.setState({ movies: filteredMovie })
-    console.log(filteredMovie)
   }
 
   displayMainPage = () => {
@@ -25,8 +32,6 @@ class App extends Component {
   }
   
   render() {
-    console.log(this.state.movies)
-    console.log(this.state.movies[0].title)
     return (
       <main className="App">
           <h1>Rancid Tomatillos</h1>
