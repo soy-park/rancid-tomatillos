@@ -2,7 +2,7 @@ import React from "react";
 import './Movies.css';
 import Movie from './Movie';
 
-function Movies({movies, displayMovieInfo}) {
+function Movies({ movies, displayMovieInfo }) {
     const movieCards = movies.map(movieInfo => {
         return (
           <Movie
