@@ -1,5 +1,6 @@
 import React from "react";
 import './SingleMovie.css';
+import PropTypes from "prop-types";
 
 const SingleMovie = ({ movie, displayMainPage }) => {
    return (
@@ -24,3 +25,8 @@ const SingleMovie = ({ movie, displayMainPage }) => {
 
 
 export default SingleMovie;
+
+SingleMovie.propTypes = {
+  movie: PropTypes.any.isRequired,
+  displayMainPage: PropTypes.func.isRequired
+}
