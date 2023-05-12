@@ -7,6 +7,7 @@ function Movies({movies, displayMovieInfo}) {
         return (
           <Movie
             poster={movieInfo.poster_path}
+            title={movieInfo.title}
             id={movieInfo.id}
             key={movieInfo.id}
             displayMovieInfo={displayMovieInfo}
