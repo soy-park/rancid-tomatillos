@@ -1,0 +1,37 @@
+.single-movie-info {
+  display: flex;
+  justify-content: space-evenly;
+  color: aliceblue;
+  background-color: #282c34;
+  height: 100%;
+  width: 100%;
+}
+
+.single-img {
+  height: 50em;
+  width: 30em
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #282c34;
+}
+
+.single-title {
+  font-size: 45px;
+}
+
+.back-to-main {
+  padding-top: .4em;
+  padding-bottom: .4em;
+  width: 10em;
+  margin-top: 3em;
+  font-size: 17px;
+}
+
+.back-to-main:hover {
+  cursor: pointer;
+  background-color: rgb(155, 150, 204);
+}
