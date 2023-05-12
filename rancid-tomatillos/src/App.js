@@ -19,6 +19,10 @@ class App extends Component {
     this.setState({ movies: filteredMovie })
     console.log(filteredMovie)
   }
+
+  displayMainPage = () => {
+    this.setState({ movies: movieData.movies })
+  }
   
   render() {
     console.log(this.state.movies)
@@ -27,7 +31,7 @@ class App extends Component {
       <main className="App">
           <h1>Rancid Tomatillos</h1>
           {this.state.movies.length > 1 && <Movies movies={this.state.movies} displayMovieInfo={this.displayMovieInfo}/>}
-          {this.state.movies.length === 1 && <SingleMovie movie={this.state.movies}/> } 
+          {this.state.movies.length === 1 && <SingleMovie movie={this.state.movies} displayMainPage={this.displayMainPage}/> } 
       </main>
     )
   } 

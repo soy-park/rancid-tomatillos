@@ -1,0 +1,23 @@
+.single-movie-info {
+  display: flex;
+  justify-content: space-evenly;
+  color: aliceblue;
+  background-color: #282c34;
+  height: 100%;
+  width: 100%;
+}
+
+.single-img {
+  height: 50em;
+  width: 30em
+}
+
+.movie-info {
+  display: flex;
+  flex-direction: column;
+  background-color: #282c34;
+}
+
+.single-title {
+  font-size: 45px;
+}
