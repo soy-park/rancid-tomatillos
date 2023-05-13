@@ -9,8 +9,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
-      error: ''
+      movies: []
     }
   }
 
@@ -49,7 +48,6 @@ class App extends Component {
   }
   
   render() {
-    // console.log(this.state.error)
     return (
       <main className="App">
           <h1>Rancid Tomatillos</h1>
