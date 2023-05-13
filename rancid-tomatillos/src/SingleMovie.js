@@ -23,7 +23,6 @@ const SingleMovie = ({ movie, displayMainPage }) => {
   );
 };
 
-
 export default SingleMovie;
 
 SingleMovie.propTypes = {

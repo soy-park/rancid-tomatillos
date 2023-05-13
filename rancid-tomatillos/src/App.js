@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   displayMainPage = () => {
-    this.setState({ movies: movieData.movies })
+    this.componentDidMount();
   }
   
   render() {
