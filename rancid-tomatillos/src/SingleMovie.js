@@ -12,10 +12,10 @@ const SingleMovie = ({ movie, displayMainPage }) => {
         <p>Genre: {(movie[0].genres)}</p>
         <p>Tagline: {(movie[0].tagline)}</p>
         <p>Plot: {(movie[0].overview)}</p>
-        <p>Runtime: {(movie[0].runtime)}</p>
+        <p>Runtime: {(movie[0].runtime)} min</p>
         <p>Average Rating: {(movie[0].average_rating).toFixed(1)}</p>
-        <p>Budget: {(movie[0].budget)}</p>
-        <p>Revenue: {(movie[0].revenue)}</p>
+        <p>Budget: ${(movie[0].budget)}</p>
+        <p>Revenue: ${(movie[0].revenue)}</p>
       <button className="back-to-main" onClick= {() => displayMainPage()}>Back to Main</button>
       </div>
     </div>

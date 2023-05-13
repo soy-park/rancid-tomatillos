@@ -9,25 +9,39 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      movies: []
+      movies: [],
+      error: ''
     }
   }
 
   componentDidMount = () => {
     fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies")
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`)
+        } else {
+          return response.json();
+        }
+      })
       .then(data => {
         this.setState({ movies: data.movies })
       })
+      .catch(err => console.log(err))
   }
 
   displayMovieInfo = (id) => {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`)
+        } else {
+          return response.json();
+        }
+      })
       .then(data => {
-        // const filteredMovie = this.state.movies.filter(movie => movie.id === id);
         this.setState({ movies: [data.movie]})
       })
+      .catch(err => console.log(err))
   }
 
   displayMainPage = () => {
@@ -35,7 +49,7 @@ class App extends Component {
   }
   
   render() {
-    console.log(this.state.movies.length)
+    // console.log(this.state.error)
     return (
       <main className="App">
           <h1>Rancid Tomatillos</h1>
