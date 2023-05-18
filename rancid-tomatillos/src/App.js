@@ -4,6 +4,7 @@ import movieData from './mockData';
 import Movies from "./Movies";
 import SingleMovie from "./SingleMovie";
 import Movie from "./Movie";
+import { Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   constructor() {
@@ -51,8 +52,19 @@ class App extends Component {
     return (
       <main className="App">
           <h1>Rancid Tomatillos</h1>
-          {this.state.movies.length > 1 && <Movies movies={this.state.movies} displayMovieInfo={this.displayMovieInfo}/>}
-          {this.state.movies.length === 1 && <SingleMovie movie={this.state.movies} displayMainPage={this.displayMainPage}/> } 
+          <Switch>
+            <Route exact path="/" render={() => <Movies name="movies" movies={this.state.movies} displayMovieInfo={this.displayMovieInfo} />} />
+            <Route path="/:id" render={({match}) => {
+              const movieID = match.params.id;
+              this.displayMovieInfo(movieID);
+              return (<SingleMovie movie={this.state.movies} displayMainPage={this.displayMainPage} />
+              )
+            }
+          } />
+          </Switch>
+
+          {/* {this.state.movies.length > 1 && <Movies movies={this.state.movies} displayMovieInfo={this.displayMovieInfo}/>} */}
+          {/* {this.state.movies.length === 1 && <SingleMovie movie={this.state.movies} displayMainPage={this.displayMainPage}/> }  */}
       </main>
     )
   } 
