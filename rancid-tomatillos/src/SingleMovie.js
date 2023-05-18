@@ -3,6 +3,9 @@ import './SingleMovie.css';
 import PropTypes from "prop-types";
 
 const SingleMovie = ({ movie, displayMainPage }) => {
+   if (!movie) {
+    return displayMainPage();
+   }
    return (
     <div className="single-movie-info">
       <img className="single-img"src={movie[0].poster_path} />
