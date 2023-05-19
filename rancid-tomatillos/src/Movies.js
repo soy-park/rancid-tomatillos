@@ -2,6 +2,11 @@ import React from "react";
 import './Movies.css';
 import Movie from './Movie';
 import PropTypes from "prop-types";
+<<<<<<< HEAD
+=======
+import { Route, Link } from 'react-router-dom';
+>>>>>>> 308ebd693c45da86814435438f73a1b58ac51901
+
 
 function Movies({ movies, displayMovieInfo }) {
       const movieCards = movies.map(movieInfo => {
