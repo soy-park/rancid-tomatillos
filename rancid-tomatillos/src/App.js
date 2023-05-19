@@ -4,7 +4,8 @@ import movieData from './mockData';
 import Movies from "./Movies";
 import SingleMovie from "./SingleMovie";
 import Movie from "./Movie";
-import { Route, Switch } from 'react-router-dom';
+import Form from "./Form";
+import { Route } from 'react-router-dom';
 
 class App extends Component {
   constructor() {
@@ -51,15 +52,29 @@ class App extends Component {
     this.setState({ movies: this.state.movies, singleMovie: {} })
   }
   
+  filterMovies = () => {
+    const desiredMovie = this.state.value.toLowerCase();
+    const moviesInLowerCase = this.state.movies.map(movie => movie.title.toLowerCase());
+    const searchedMovies = moviesInLowerCase.filter(movie => movie.title.includes(desiredMovie));
+
+    this.setState({ filteredMovies: searchedMovies })
+  }
+
+  handleChange(event) {
+    this.setState({ 
+      movies: this.state.movies,
+      singleMovie: {},
+      value: event.target.value,
+      filteredMovies: []
+    })
+  }
+
   render() {
     return (
       <main className="App">
           <h1>Rancid Tomatillos</h1>
-          <form>
-            <input type="text" name="searchbar" placeholder="Search Movie" value={this.state.value}></input>
-            <input type="submit" value="Submit"></input>
-          </form>
-          <Route exact path="/" render={() => <Movies name="movies" movies={this.state.movies} singleMovie={this.state.singleMovie} displayMovieInfo={this.displayMovieInfo} />} />
+          <Route exact path="/" render={() => <Form value={this.state.value} handleChange={this.handleChange} filteredMovies={this.state.filteredMovies}/>} />
+          <Route exact path="/" render={() => <Movies name="movies" movies={this.state.movies} singleMovie={this.state.singleMovie} displayMovieInfo={this.displayMovieInfo}/>} />
           <Route path="/:id" render={({ match }) => {
             const movieID = match.params.id;
             this.displayMovieInfo(movieID);
