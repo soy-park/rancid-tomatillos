@@ -52,15 +52,22 @@ class App extends Component {
     this.setState({ movies: this.state.movies, singleMovie: {} })
   }
   
-  filterMovies = () => {
+  filterMovies = (event) => {
+    event.preventDefault();
     const desiredMovie = this.state.value.toLowerCase();
     const moviesInLowerCase = this.state.movies.map(movie => movie.title.toLowerCase());
-    const searchedMovies = moviesInLowerCase.filter(movie => movie.title.includes(desiredMovie));
+    const searchedMovies = moviesInLowerCase.filter(movie => movie.includes(desiredMovie));
 
-    this.setState({ filteredMovies: searchedMovies })
+    this.setState({ 
+      movies: this.state.movies,
+      singleMovie: {},
+      value: event.target.value,
+      filteredMovies: searchedMovies 
+    })
   }
 
   handleChange = (event) => {
+    event.preventDefault();
     this.setState({ 
       movies: this.state.movies,
       singleMovie: {},
