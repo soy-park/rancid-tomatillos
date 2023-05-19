@@ -11,7 +11,9 @@ class App extends Component {
     super();
     this.state = {
       movies: [],
-      singleMovie: {}
+      singleMovie: {},
+      value: '',
+      filteredMovies: []
     }
   }
 
@@ -53,14 +55,18 @@ class App extends Component {
     return (
       <main className="App">
           <h1>Rancid Tomatillos</h1>
-            <Route exact path="/" render={() => <Movies name="movies" movies={this.state.movies} singleMovie={this.state.singleMovie} displayMovieInfo={this.displayMovieInfo} />} />
-            <Route path="/:id" render={({ match }) => {
-              const movieID = match.params.id;
-              this.displayMovieInfo(movieID);
-              return (<SingleMovie movie={this.state.singleMovie} displayMainPage={this.displayMainPage} />
-              )
-            }
-          } />
+          <form>
+            <input type="text" name="searchbar" placeholder="Search Movie" value={this.state.value}></input>
+            <input type="submit" value="Submit"></input>
+          </form>
+          <Route exact path="/" render={() => <Movies name="movies" movies={this.state.movies} singleMovie={this.state.singleMovie} displayMovieInfo={this.displayMovieInfo} />} />
+          <Route path="/:id" render={({ match }) => {
+            const movieID = match.params.id;
+            this.displayMovieInfo(movieID);
+            return (<SingleMovie movie={this.state.singleMovie} displayMainPage={this.displayMainPage} />
+            )
+          }
+        } />
       </main>
     )
   } 
