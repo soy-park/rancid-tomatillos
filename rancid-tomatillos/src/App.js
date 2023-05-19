@@ -10,7 +10,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      movies: []
+      movies: [],
+      singleMovie: {}
     }
   }
 
@@ -27,7 +28,7 @@ class App extends Component {
         this.setState({ movies: data.movies })
       })
       .catch(err => console.log(err))
-  }
+  }  
 
   displayMovieInfo = (id) => {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
@@ -39,32 +40,27 @@ class App extends Component {
         }
       })
       .then(data => {
-        this.setState({ movies: [data.movie]})
+        this.setState({ movies: this.state.movies, singleMovie: data.movie })
       })
       .catch(err => console.log(err))
   }
 
   displayMainPage = () => {
-    this.componentDidMount();
+    this.setState({ movies: this.state.movies, singleMovie: {} })
   }
   
   render() {
     return (
       <main className="App">
           <h1>Rancid Tomatillos</h1>
-          <Switch>
-            <Route exact path="/" render={() => <Movies name="movies" movies={this.state.movies} displayMovieInfo={this.displayMovieInfo} />} />
-            <Route path="/:id" render={({match}) => {
+            <Route exact path="/" render={() => <Movies name="movies" movies={this.state.movies} singleMovie={this.state.singleMovie} displayMovieInfo={this.displayMovieInfo} />} />
+            <Route path="/:id" render={({ match }) => {
               const movieID = match.params.id;
               this.displayMovieInfo(movieID);
-              return (<SingleMovie movie={this.state.movies} displayMainPage={this.displayMainPage} />
+              return (<SingleMovie movie={this.state.singleMovie} displayMainPage={this.displayMainPage} />
               )
             }
           } />
-          </Switch>
-
-          {/* {this.state.movies.length > 1 && <Movies movies={this.state.movies} displayMovieInfo={this.displayMovieInfo}/>} */}
-          {/* {this.state.movies.length === 1 && <SingleMovie movie={this.state.movies} displayMainPage={this.displayMainPage}/> }  */}
       </main>
     )
   } 
