@@ -60,7 +60,7 @@ class App extends Component {
     this.setState({ filteredMovies: searchedMovies })
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({ 
       movies: this.state.movies,
       singleMovie: {},
@@ -73,7 +73,7 @@ class App extends Component {
     return (
       <main className="App">
           <h1>Rancid Tomatillos</h1>
-          <Route exact path="/" render={() => <Form value={this.state.value} handleChange={this.handleChange} filteredMovies={this.state.filteredMovies}/>} />
+          <Route exact path="/" render={() => <Form value={this.state.value} handleChange={this.handleChange} filterMovies={this.filterMovies}/>} />
           <Route exact path="/" render={() => <Movies name="movies" movies={this.state.movies} singleMovie={this.state.singleMovie} displayMovieInfo={this.displayMovieInfo}/>} />
           <Route path="/:id" render={({ match }) => {
             const movieID = match.params.id;
