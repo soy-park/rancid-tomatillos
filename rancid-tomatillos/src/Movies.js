@@ -21,8 +21,8 @@ function Movies({ movies, displayMovieInfo }) {
         <div className="movies-container">
             {movieCards}
         </div>
-    )
-}
+    );
+};
 
 export default Movies;
 

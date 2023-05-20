@@ -13,11 +13,10 @@ class App extends Component {
     this.state = {
       movies: [],
       singleMovie: {},
-      value: '',
       filteredMovies: [],
-      searchedMoive: ""
+      searchedMovie: ""
     }
-  }
+  };
 
   componentDidMount = () => {
     fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies")
@@ -32,34 +31,16 @@ class App extends Component {
         this.setState({ movies: data.movies })
       })
       .catch(err => console.log(err))
-  }  
+  };
 
   filterMovies = (title) => {
-    console.log(title.toLowerCase())
-    const filteredMovies = this.state.movies.filter(movie => movie.title.toLowerCase().includes(title.toLowerCase()))
-    this.setState({filteredMovies: filteredMovies, searchedMoive: title})
-    console.log(this.state.filteredMovies)
-    console.log(this.searchedMoive)
-  }
+    const filteredMovies = this.state.movies.filter(movie => movie.title.toLowerCase().includes(title.toLowerCase()));
+    this.setState({filteredMovies: filteredMovies, searchedMovie: title});
+  };
 
   clearFilteredMovies = () => {
-    this.setState({filteredMovies: [], searchedMoive: ""})
-  }
-
-  // filterMovies = (event) => {
-  //   const desiredMovie = this.state.value.toLowerCase();
-  //   const moviesInLowerCase = this.state.movies.map(movie => movie.title.toLowerCase());
-  //   const searchedMovieTitles = moviesInLowerCase.filter(movie => movie.includes(desiredMovie));
-  //   const searchedMovieTitlesFormatted = searchedMovieTitles.map(movie => movie.split(' ').map(word => word[0].toUpperCase() + word.substr(1)).join(' '));
-  //   const searchedMovies = this.state.movies.filter(movie => movie.title === searchedMovieTitlesFormatted[0])
-  //   this.setState({ 
-  //     movies: this.state.movies,
-  //     singleMovie: {},
-  //     value: event.target.value,
-  //     filteredMovies: this.state.filteredMovies.push(searchedMovies)
-  //   })
-  //   console.log(this.state.filteredMovies)
-  // }
+    this.setState({filteredMovies: [], searchedMovie: ""});
+  };
 
   displayMovieInfo = (id) => {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
@@ -74,43 +55,28 @@ class App extends Component {
         this.setState({ movies: this.state.movies, singleMovie: data.movie })
       })
       .catch(err => console.log(err))
-  }
+  };
 
   displayMainPage = () => {
-    this.setState({ movies: this.state.movies, singleMovie: {} })
-  }
-  
-  // handleChange = (event) => {
-  //   event.preventDefault();
-  //   this.setState({ 
-  //     movies: this.state.movies,
-  //     singleMovie: {},
-  //     value: event.target.value,
-  //     filteredMovies: []
-  //   })
-  // }
-  
+    this.setState({ movies: this.state.movies, singleMovie: {} });
+  };
 
   render() {
-    const movieData = this.state.searchedMoive ? this.state.filteredMovies : this.state.movies
+    const movieData = this.state.searchedMovie ? this.state.filteredMovies : this.state.movies;
     return (
       <main className="App">
           <h1>Rancid Tomatillos</h1>
           <Route exact path="/" render={() => <Form filterMovies={this.filterMovies} clearFilteredMovies={this.clearFilteredMovies}/>} />
-          {/* <Route exact path="/" render={() => <Form value={this.state.value} id={this.state.filteredMovies} handleChange={this.handleChange} filterMovies={this.filterMovies}/>} /> */}
-          <Switch>
           <Route exact path="/" render={() => <Movies name = "movies" movies={movieData} displayMovieInfo={this.displayMovieInfo}/>} />
-          {/* <Route exact path="/" render={() => <Movies name="movies" movies={this.state.movies} singleMovie={this.state.singleMovie} displayMovieInfo={this.displayMovieInfo}/>} /> */}
           <Route path="/:id" render={({ match }) => {
             const movieID = match.params.id;
             this.displayMovieInfo(movieID);
             return (<SingleMovie movie={this.state.singleMovie} displayMainPage={this.displayMainPage} />
             )
           }} />
-          </Switch>
       </main>
-    )
-  } 
-}
+    );
+  } ;
+};
 
 export default App;

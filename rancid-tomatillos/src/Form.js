@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import './Form.css'
 
 class Form extends Component {
     constructor(props) {
@@ -10,22 +10,17 @@ class Form extends Component {
     };
 
     handleChange = (event) => {
-        
         this.setState({ [event.target.name]: event.target.value }, () => this.props.filterMovies(this.state.title))
-        console.log(this.state.title)
-        // console.log(this.props.filterMovies())
-    }
+    };
 
     clearInputs = (event) => {
-        console.log(this.props)
-        event.preventDefault();
         this.setState({title: ''});
         this.props.clearFilteredMovies();
-    }
+    };
 
     render() {
         return (
-            <div>
+            <div className="form-container">
                 <input 
                     type="text" 
                     placeholder="Search Movie Title" 
@@ -34,19 +29,11 @@ class Form extends Component {
                     onChange={(event) => this.handleChange(event)}
                     className="search-field"
                 />
-                <button className="button" onClick={(event) => this.clearInputs(event)}>
-                Clear
-                </button>
-                {/* <Link to={`/${id}`} key={`${id}`}><input 
-                    type="submit" 
-                    value="Submit" 
-                    onClick={(event) => filterMovies(event)}
-                /></Link> */}
+                <button className="button" onClick={(event) => this.clearInputs(event)}>Back to All Movies</button>
             </div>
         )
-     }
-
-    }
+     };
+    };
 
 
 
