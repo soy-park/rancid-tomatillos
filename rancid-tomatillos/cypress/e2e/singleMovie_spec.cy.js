@@ -8,12 +8,12 @@ describe('Single Movie Page', () => {
       .get('.single-movie-info')
   });
 
-  it('should see a single movies info displayed', () => {
+  it('should see a single movie info displayed', () => {
       cy.contains('h2', 'Black Adam')
         .get('.movie-info').contains('Runtime: 125 min');
   });
 
-  it('should be abe to go back to the main menu', () => {
+  it('should be able to go back to the main menu', () => {
       cy.get('button').click()
         .get('.movies-container');
   });
