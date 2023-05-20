@@ -6,6 +6,7 @@ import SingleMovie from "./SingleMovie";
 import Movie from "./Movie";
 import Form from "./Form";
 import { Route, Switch } from 'react-router-dom';
+import PropTypes from "prop-types";
 
 class App extends Component {
   constructor() {
@@ -22,7 +23,7 @@ class App extends Component {
     fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies")
       .then(response => {
         if (!response.ok) {
-          throw new Error(`Error: ${response.status}`)
+          throw new Error(`${response.status}`)
         } else {
           return response.json();
         }
@@ -30,7 +31,9 @@ class App extends Component {
       .then(data => {
         this.setState({ movies: data.movies })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        throw new Error(`${err}`)
+      })
   };
 
   filterMovies = (title) => {
@@ -46,7 +49,7 @@ class App extends Component {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
       .then(response => {
         if (!response.ok) {
-          throw new Error(`Error: ${response.status}`)
+          throw new Error(`${response.status}`)
         } else {
           return response.json();
         }
@@ -54,7 +57,9 @@ class App extends Component {
       .then(data => {
         this.setState({ movies: this.state.movies, singleMovie: data.movie })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        throw new Error(`${err}`)
+      })
   };
 
   displayMainPage = () => {
@@ -67,6 +72,7 @@ class App extends Component {
       <main className="App">
           <h1>Rancid Tomatillos</h1>
           <Route exact path="/" render={() => <Form filterMovies={this.filterMovies} clearFilteredMovies={this.clearFilteredMovies}/>} />
+          {(this.state.filteredMovies.length === 0 && this.state.searchedMovie) && <h2 className="error-message">Sorry, no movies match that title</h2>}
           <Route exact path="/" render={() => <Movies name = "movies" movies={movieData} displayMovieInfo={this.displayMovieInfo}/>} />
           <Route path="/:id" render={({ match }) => {
             const movieID = match.params.id;
@@ -80,3 +86,10 @@ class App extends Component {
 };
 
 export default App;
+
+App.propTypes = {
+  movies: PropTypes.array.isRequired,
+  singleMovie: PropTypes.object,
+  filteredMovies: PropTypes.array,
+  searchedMovie: PropTypes.string
+}
