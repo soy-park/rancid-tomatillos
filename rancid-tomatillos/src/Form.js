@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
-const Form = ({ value, handleChange, filterMovies }) => {
+const Form = ({ id, value, handleChange, filterMovies }) => {
     return (
         <form>
             <input 
@@ -9,11 +10,11 @@ const Form = ({ value, handleChange, filterMovies }) => {
                 placeholder="Search Movie" 
                 onChange={handleChange}
             />
-            <input 
+            <Link to={`/${id}`} key={`${id}`}><input 
                 type="submit" 
                 value="Submit" 
-                onClick={filterMovies}
-            />
+                onClick={(event) => filterMovies(event)}
+            /></Link>
         </form>
     )
  }

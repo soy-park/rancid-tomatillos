@@ -52,20 +52,6 @@ class App extends Component {
     this.setState({ movies: this.state.movies, singleMovie: {} })
   }
   
-  filterMovies = (event) => {
-    event.preventDefault();
-    const desiredMovie = this.state.value.toLowerCase();
-    const moviesInLowerCase = this.state.movies.map(movie => movie.title.toLowerCase());
-    const searchedMovies = moviesInLowerCase.filter(movie => movie.includes(desiredMovie));
-
-    this.setState({ 
-      movies: this.state.movies,
-      singleMovie: {},
-      value: event.target.value,
-      filteredMovies: searchedMovies 
-    })
-  }
-
   handleChange = (event) => {
     event.preventDefault();
     this.setState({ 
@@ -75,20 +61,34 @@ class App extends Component {
       filteredMovies: []
     })
   }
+  
+  filterMovies = (event) => {
+    const desiredMovie = this.state.value.toLowerCase();
+    const moviesInLowerCase = this.state.movies.map(movie => movie.title.toLowerCase());
+    const searchedMovieTitles = moviesInLowerCase.filter(movie => movie.includes(desiredMovie));
+    const searchedMovieTitlesFormatted = searchedMovieTitles.map(movie => movie.split(' ').map(word => word[0].toUpperCase() + word.substr(1)).join(' '));
+    const searchedMovies = this.state.movies.filter(movie => movie.title === searchedMovieTitlesFormatted[0])
+    this.setState({ 
+      movies: this.state.movies,
+      singleMovie: {},
+      value: event.target.value,
+      filteredMovies: this.state.filteredMovies.push(searchedMovies)
+    })
+    console.log(this.state.filteredMovies)
+  }
 
   render() {
     return (
       <main className="App">
           <h1>Rancid Tomatillos</h1>
-          <Route exact path="/" render={() => <Form value={this.state.value} handleChange={this.handleChange} filterMovies={this.filterMovies}/>} />
+          <Route exact path="/" render={() => <Form value={this.state.value} id={this.state.filteredMovies[0].id} handleChange={this.handleChange} filterMovies={this.filterMovies}/>} />
           <Route exact path="/" render={() => <Movies name="movies" movies={this.state.movies} singleMovie={this.state.singleMovie} displayMovieInfo={this.displayMovieInfo}/>} />
           <Route path="/:id" render={({ match }) => {
             const movieID = match.params.id;
             this.displayMovieInfo(movieID);
             return (<SingleMovie movie={this.state.singleMovie} displayMainPage={this.displayMainPage} />
             )
-          }
-        } />
+          }} />
       </main>
     )
   } 
