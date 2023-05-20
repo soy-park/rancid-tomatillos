@@ -16,7 +16,12 @@ class Form extends Component {
         // console.log(this.props.filterMovies())
     }
 
-   
+    clearInputs = (event) => {
+        console.log(this.props)
+        event.preventDefault();
+        this.setState({title: ''});
+        this.props.clearFilteredMovies();
+    }
 
     render() {
         return (
