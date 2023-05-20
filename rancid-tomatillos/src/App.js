@@ -80,3 +80,10 @@ class App extends Component {
 };
 
 export default App;
+
+App.propTypes = {
+  movies: PropTypes.array.isRequired,
+  singleMovie: PropTypes.object,
+  filteredMovies: PropTypes.array,
+  searchedMovie: PropTypes.string
+}
