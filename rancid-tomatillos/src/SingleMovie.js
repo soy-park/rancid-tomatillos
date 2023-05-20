@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from 'react-router-dom';
 
 const SingleMovie = ({ movie, displayMainPage }) => {
-  const movieRating = Math.round(movie.average_rating)
+  const movieRating = Math.round(movie.average_rating);
    return (
     <div className="single-movie-info">
       <img className="single-img"src={movie.poster_path} />
@@ -18,11 +18,11 @@ const SingleMovie = ({ movie, displayMainPage }) => {
         <p>Average Rating: {movieRating}</p>
         <p>Budget: ${movie.budget}</p>
         <p>Revenue: ${movie.revenue}</p>
-      <Link to={'/'} key={`${movie.id}`}><button className="back-to-main" onClick= {() => displayMainPage()}>Back to Main</button></Link>
+      <Link to={'/'} key={`${movie.id}`}><button className="back-to-main" onClick= {() => displayMainPage()}>Back to Movies</button></Link>
       </div>
     </div>
   );
-  }; 
+}; 
 
 
 export default SingleMovie;
@@ -30,4 +30,4 @@ export default SingleMovie;
 SingleMovie.propTypes = {
   movie: PropTypes.any.isRequired,
   displayMainPage: PropTypes.func.isRequired
-}
+};

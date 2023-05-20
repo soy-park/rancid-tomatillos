@@ -1,0 +1,16 @@
+.form-container {
+  margin-left: 20px;
+  /* cursor: pointer; */
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: rgb(155, 150, 204);
+}
+
+.button {
+  margin-left: 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
