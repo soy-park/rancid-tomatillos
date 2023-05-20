@@ -23,7 +23,7 @@ class App extends Component {
     fetch("https://rancid-tomatillos.herokuapp.com/api/v2/movies")
       .then(response => {
         if (!response.ok) {
-          throw new Error(`Error: ${response.status}`)
+          throw new Error(`${response.status}`)
         } else {
           return response.json();
         }
@@ -31,7 +31,9 @@ class App extends Component {
       .then(data => {
         this.setState({ movies: data.movies })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        throw new Error(`${err}`)
+      })
   };
 
   filterMovies = (title) => {
@@ -47,7 +49,7 @@ class App extends Component {
     fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${id}`)
       .then(response => {
         if (!response.ok) {
-          throw new Error(`Error: ${response.status}`)
+          throw new Error(`${response.status}`)
         } else {
           return response.json();
         }
@@ -55,7 +57,9 @@ class App extends Component {
       .then(data => {
         this.setState({ movies: this.state.movies, singleMovie: data.movie })
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        throw new Error(`${err}`)
+      })
   };
 
   displayMainPage = () => {
