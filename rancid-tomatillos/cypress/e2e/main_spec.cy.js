@@ -13,25 +13,31 @@ describe('Main page', () => {
     cy.contains('h1', 'Rancid Tomatillos');
   });
 
-  // it('should have a form searchbar that takes in a title', () => {
-  //   cy.get(".search-field").type('woman').should('have.value', 'woman')
-  // });
+  it('should have a form searchbar that takes in a title', () => {
+    cy.get(".search-field").type('woman').should('have.value', 'woman')
+  });
 
-  // it('should see movies that match title in searchbar', () => {
-  //   cy.get(".search-field").type('woman')
-  //   .get('.movies-container').should('have.length', 1)
-  // });
+  it('should see movies that match title in searchbar', () => {
+    cy.get(".search-field").type('black')
+      .get('.movieCard').each(($movieCard) => {cy.wrap($movieCard).find('img').should('be.visible')})
+  });
 
-  // it('should be able to click on form button to return to main page', () => {
-    
-  // });
+  it('should be able to click on form button to return to main page', () => {
+    cy.get('.button').click()
+      .get('img').should("have.length", 4);
+  });
+
+  it('should display error message when no movies match title', () => {
+    cy.get(".search-field").type('z')
+      .get('h2').contains("Sorry, no movies match that title")
+  });
 
   it('should display all movies', () => {
     cy.get('img').should("be.visible")
       .get('img').should("have.length", 4);
   });
 
-  it('should render a specific movies details once clicked', () => {
+  it('should render a specific movie details once clicked', () => {
     cy.get('img').first().click()
       .get('.single-movie-info');
   });
